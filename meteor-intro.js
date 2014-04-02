@@ -33,7 +33,7 @@ if ( Meteor.isClient ) {
 	// To change state from user action, just react to change in an
 	// event map function by updating state in either the Session or
 	// Collection.
-	Template.hello.events( {
+	Template.items.events( {
 		'click .item': function ( evt ) {
 			Session.set( 'currentItem', $( evt.currentTarget ).data( 'id' ) );
 		}
