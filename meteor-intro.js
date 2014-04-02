@@ -21,15 +21,21 @@ if ( Meteor.isClient ) {
 	// Here's how you set a value on the Session.
 	Session.set( 'currentItem', 1 );
 
-	Template.hello.greeting = function () {
-		return "Welcome to meteor-intro.";
+	// You get state rendered to your UI by
+	// defining rendering functions. This takes
+	// time to adjust to, but no matter how complex
+	// your data model gets, you'll always be returning
+	// just Arrays and Objects.
+	Template.items.items = function () {
+		return [ {}, {}, {} ];
 	};
 
+	// To change state from user action, just react to change in an
+	// event map function by updating state in either the Session or
+	// Collection.
 	Template.hello.events( {
-		'click input': function () {
-			// template data, if any, is available in 'this'
-			if ( typeof console !== 'undefined' )
-				console.log( "You pressed the button" );
+		'click .item': function ( evt ) {
+			Session.set( 'currentItem', $( evt.currentTarget ).data( 'id' ) );
 		}
 	} );
 }
