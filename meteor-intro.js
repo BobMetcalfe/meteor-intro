@@ -51,6 +51,28 @@ if ( Meteor.isClient ) {
 			Session.set( 'currentItem', this.id );
 		}
 	} );
+
+	// As the user changes the name in the input field for an item,
+	// update that Item in Mongo.
+	Template.items.events( {
+		'input input': function ( evt ) {
+			// In mongo, you specify which record you want to update
+			// by using its _id. Here we use a $set to just change the
+			// name value
+			Items.update( this._id, {
+				$set: {
+					name: $( evt.currentTarget ).val()
+				}
+			} );
+		},
+
+		// when a user focuses the name input, set that Item
+		// as currentItem
+		'focus input': function ( evt ) {
+			Session.set( 'currentItem', this.id );
+		}
+	} );
+
 }
 
 if ( Meteor.isServer ) {
