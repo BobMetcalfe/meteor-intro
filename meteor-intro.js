@@ -48,7 +48,7 @@ if ( Meteor.isClient ) {
 	// Collection.
 	Template.items.events( {
 		'click .item': function ( evt ) {
-			Session.set( 'currentItem', $( evt.currentTarget ).data( 'id' ) );
+			Session.set( 'currentItem', this.id );
 		}
 	} );
 }
