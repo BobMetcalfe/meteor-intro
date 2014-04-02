@@ -26,9 +26,22 @@ if ( Meteor.isClient ) {
 	// time to adjust to, but no matter how complex
 	// your data model gets, you'll always be returning
 	// just Arrays and Objects.
+
+	// Here we fetch all records in the Items collection.
+	// By returning them our template renders an item template
+	// for each record in the database.
 	Template.items.items = function () {
-		return [ {}, {}, {} ];
+		return Items.find( {} ).fetch();
 	};
+
+	// We want an item to highlight when it's selected. We pass
+	// that state using the isSelected key.  Because we do a
+	// Session.get('currentItem'), anytime our app does a
+	// Session.set('currentItem') this function gets re-run and
+	// our UI updates
+	Template.item.isSelected = function () {
+		return Session.get( 'currentItem' ) === this.id;
+	}
 
 	// To change state from user action, just react to change in an
 	// event map function by updating state in either the Session or
@@ -42,6 +55,14 @@ if ( Meteor.isClient ) {
 
 if ( Meteor.isServer ) {
 	Meteor.startup( function () {
-		// code to run on server at startup
+
+		// For the purpose of prototyping, you can easily
+		// create fixture data on the server on startup.
+		Items.remove( {} );
+		for ( var i = 0; i < 3; i++ ) {
+			Items.insert( {
+				id: i
+			} );
+		};
 	} );
 }

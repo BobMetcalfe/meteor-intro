@@ -8,6 +8,12 @@
 
 <template name="items">
   {{#each items}}
-    <div class="item">Item</div>
+    {{> item}}
   {{/each}}
+</template>
+
+<template name="item">
+  <div class="item {{#if isSelected}}selected{{/if}}" data-id="{{id}}">
+    <input type="text" value="{{name}}" placeholder="Choose Name" />
+  </div>
 </template>
