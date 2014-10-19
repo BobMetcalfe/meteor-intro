@@ -3,17 +3,17 @@
 </head>
 
 <body>
-  {{> items}}
+  {{> itemsListTemplate}}
 </body>
 
-<template name="items">
-  {{#each items}}
-    {{> item}}
+<template name="itemsListTemplate">
+  {{#each itemsList}}
+    {{> itemTemplate}}
   {{/each}}
 </template>
 
-<template name="item">
-  <div class="item {{#if isSelected}}selected{{/if}}">
+<template name="itemTemplate">
+  <div class="itemClass {{#if isSelected}}selected{{/if}}">
     <input type="text" value="{{name}}" placeholder="Choose Name" />
   </div>
 </template>
